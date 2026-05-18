@@ -11,7 +11,7 @@ export const  getAllPets = async()=>{
 };
 // get single pet by id
 export const getSinglePet = async(id)=>{
-    const res = await fetch(`${NEXT_PUBLIC_API_URL}/pets/${id}`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pets/${id}`)
     const data = await res.json()
     return data;
 }

@@ -99,10 +99,12 @@ export default function NavBar() {
                 </Link>
               </li>
 
-              <li className="mt-4 flex flex-col gap-2 border-t border-separator pt-4">
+             {
+              (!isPending && !user)?  <li className="mt-4 flex flex-col gap-2 border-t border-separator pt-4">
                 <Link href="/login" > <Button className="w-full">Login</Button></Link>
                 <Link href="/signup" > <Button className="w-full">Sign Up</Button></Link>
-              </li>
+              </li> : <></>
+             }
             </ul>
           </div>
         )

@@ -1,11 +1,15 @@
-import PetDetailsPage from '@/components/PetsDetailsCard';
-import React from 'react';
+import PetDetailsCard from '@/components/PetsDetailsCard';
+import { getSinglePet } from '@/lib/data';
 
-const DetailsPage = () => {
+const DetailsPage = async({ params }) => {
+    const { id } = await params;
+    const pets = await getSinglePet(id)
 
     return (
         <div>
-              <PetDetailsPage/>
+            {
+                pets.map(pet => <PetDetailsCard pet={pet} key={pet._id} />)
+            }
         </div>
     );
 };

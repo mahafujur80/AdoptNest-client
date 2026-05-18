@@ -1,8 +1,14 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { Input, Button, Label, TextArea, Description, FieldError, Fieldset, TextField, FieldGroup, Form, Calendar, DatePicker, DateField } from "@heroui/react";
 
-export default function PetAdoptForm() {
+export default function PetAdoptForm({ pet }) {
+
+    const { data: session } = authClient.useSession();
+    const user = session?.user;
+    console.log(user, 'user')
+
     return (
         <div className='py-5 border rounded-2xl border-green-300'>
             <Form className=" px-5" >
@@ -11,32 +17,40 @@ export default function PetAdoptForm() {
                     <Description>Fill out this form and the owner will review your request</Description>
                     <FieldGroup>
                         <TextField
+                            isReadOnly
+                            defaultValue={pet?.petName}
                             name="petName"
+                            type="text"
                         >
                             <Label>Pet Name</Label>
                             <Input placeholder="pet Name" />
                             <FieldError />
                         </TextField>
                         <TextField
+                            isReadOnly
+                            key={user?.name}
+                            defaultValue={user?.name}
                             name="userName"
+                            type="text"
                         >
                             <Label>User Name</Label>
                             <Input placeholder="User Name" />
                             <FieldError />
                         </TextField>
-                        <TextField  name="email" type="email">
+                        <TextField
+                            isReadOnly
+                            key={user?.email}
+                            defaultValue={user?.email}
+                            name="email"
+                            type="email">
                             <Label>Email</Label>
                             <Input placeholder="john@example.com" />
                             <FieldError />
                         </TextField>
-
-
                         <DatePicker
                             isRequired
                             className="w-full"
-                            
                             name="date"
-                           
                         >
                             <Label>Adopting Date</Label>
                             <DateField.Group fullWidth>
@@ -73,8 +87,7 @@ export default function PetAdoptForm() {
                             </DatePicker.Popover>
                         </DatePicker>
 
-
-                    <TextField
+                        <TextField
                             isRequired
                             name="bio"
                             validate={(value) => {
@@ -91,7 +104,7 @@ export default function PetAdoptForm() {
                         </TextField>
                     </FieldGroup>
                     <Fieldset.Actions>
-                        <Button type="submit"  className='w-full  bg-emerald-500 text-white rounded-lg text-sm font-semibold hover:bg-emerald-600 transition shadow-md hover:shadow-lg text-center '>
+                        <Button type="submit" className='w-full  bg-emerald-500 text-white rounded-lg font-semibold hover:bg-emerald-600 transition shadow-md hover:shadow-lg text-center '>
                             Request To Adopt
                         </Button>
                     </Fieldset.Actions>

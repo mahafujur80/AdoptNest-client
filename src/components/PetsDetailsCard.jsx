@@ -1,23 +1,8 @@
 import Image from "next/image";
-import { FaMapMarkerAlt, FaVenusMars, FaCalendar, FaSyringe, FaHeartbeat, FaDollarSign, FaPaw } from "react-icons/fa";
-import PetAdoptForm, { AdoptModal } from "./PetAdoptForm";
+import PetAdoptForm from "./PetAdoptForm";
 
-const PetDetailsPage = () => {
-    const pet = {
-        _id: "6a0a86267c7b729a5a97ef80",
-        petName: "Max",
-        species: "Dog",
-        breed: "Golden Retriever",
-        age: 3,
-        gender: "Male",
-        imageUrl: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=800&h=600&fit=crop",
-        healthStatus: "Healthy",
-        vaccinationStatus: "Fully Vaccinated",
-        location: "Tanjong Pagar, Singapore",
-        adoptionFee: 120,
-        description: "Friendly and energetic dog, loves playing with kids and outdoor activities.",
-        ownerEmail: "owner1@gmail.com"
-    };
+const PetDetailsPage = async({pet}) => {
+
 
     return (
         <section className="bg-gradient-to-br from-emerald-50 via-white to-blue-50">
@@ -123,7 +108,7 @@ const PetDetailsPage = () => {
                     </div>
                     {/* side form */}
                     <div>
-                        <PetAdoptForm/>
+                        <PetAdoptForm pet={pet}/>
                     </div>
                 </div>
             </div>

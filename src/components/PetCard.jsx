@@ -37,7 +37,7 @@ const PetCard = ({pet}) => {
             <p className="flex items-center gap-2 text-xl font-semibold text-emerald-600"><BsCurrencyDollar  className="text-emerald-600 text-lg" /> {pet?.adoptionFee} <span className='text-sm text-black'>/adoption fee</span> </p>
            </div>
            <div className="py-5 items-center  px-4 border-t-1 border-gray-300">
-            <Link href="#"><Button className='w-full  bg-emerald-500 text-white rounded-lg text-sm font-semibold hover:bg-emerald-600 transition shadow-md hover:shadow-lg text-center' variant="outline">View Details</Button></Link>
+            <Link href={`/all-pets/${pet?._id}`}><Button className='w-full  bg-emerald-500 text-white rounded-lg text-sm font-semibold hover:bg-emerald-600 transition shadow-md hover:shadow-lg text-center' variant="outline">View Details</Button></Link>
            </div>
         </div>
     );
