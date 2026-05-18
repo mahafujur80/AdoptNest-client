@@ -5,12 +5,15 @@ import {  Button } from "@heroui/react";
 import { FaPaw } from "react-icons/fa";
 import Link from 'next/link'
 import ProfileDropdown from "./DropDownProlile";
+import { authClient } from "@/lib/auth-client";
 
 export default function NavBar() {
+  const {data:session} = authClient.useSession()
+  const user = session?.user;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-40 w-full border-b border-separator bg-background/70 backdrop-blur-lg">
+    <nav className="relative sticky top-0 z-40 w-full border-b border-separator bg-background/70 backdrop-blur-lg">
       <header className=" mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         <div className="flex items-center gap-4">
           
@@ -30,8 +33,8 @@ export default function NavBar() {
           </li>
         </ul>
         <div className="hidden items-center gap-4 md:flex">
-          <Link href="/login"><Button>Login</Button></Link>
-          <Link href="/signup"><Button>Create Profile</Button></Link>
+          <Link href="/login"><Button variant='outline'>Login</Button></Link>
+          <Link href="/signup"><Button className=" bg-emerald-500 text-white rounded-lg  font-semibold hover:bg-emerald-600 transition shadow-md hover:shadow-lg">Create Profile</Button></Link>
           
          {/* dropdown  */}
          <ProfileDropdown/>
@@ -73,7 +76,7 @@ export default function NavBar() {
 
       {/* moblie menu  */}
       {isMenuOpen && (
-        <div className="border-t border-separator md:hidden">
+        <div className="absolute top-16   bg-white w-full border-t border-separator md:hidden">
           <ul className="flex flex-col gap-2 p-4">
              <li>
             <Link href="/">Home</Link>

@@ -1,135 +1,192 @@
 'use client';
-// import { authClient } from "@/lib/auth-client";
-import { Button, FieldError, Form, Input, InputGroup, Label, TextField } from "@heroui/react";
+
+import { authClient } from "@/lib/auth-client";
+import {
+  Button,
+  FieldError,
+  Form,
+  Input,
+  InputGroup,
+  Label,
+  TextField,
+} from "@heroui/react";
+
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
+
 import { BsEye, BsEyeSlash } from "react-icons/bs";
-import { FaCheck } from "react-icons/fa";
+import { FaPaw, FaSignInAlt } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { MdRefresh } from "react-icons/md";
 
 const LoginPage = () => {
 
-    const router = useRouter();
-    const searchParams = useSearchParams();
-    const callbackUrl = searchParams.get("callbackUrl");
-    console.log(callbackUrl)
+  const router = useRouter();
 
-    const [isVisible, setIsVisible] = useState(false);
-    const onSubmit = async (e) => {
-        e.preventDefault()
-        const formData = new FormData(e.target);
-        const userData = Object.fromEntries(formData.entries());
+  const [isVisible, setIsVisible] = useState(false);
 
-        const { data, error } = await authClient.signIn.email({
-            email: userData.email, // required
-            password: userData.password, // required
-            rememberMe: true,
-        });
-        if (data) {
-            toast.success("Login successful!");
-            router.push(callbackUrl || "/");
-        }
-        if (error) {
-            toast.error(error.message)
-        }
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const userData = Object.fromEntries(formData.entries());
+
+    const { data, error } = await authClient.signIn.email({
+      email: userData.email,
+      password: userData.password,
+      rememberMe: true,
+    });
+
+    if (data) {
+      toast.success("Welcome back 🐾");
+      router.push("/");
+    } else {
+      toast.error(error.message);
     }
-    const handleGoogleSignIn = async () => {
-        const data = await authClient.signIn.social({
-            provider: "google",
-        });
-    }
+  };
 
-    return (
-        <div>
-            <div className="py-10 flex flex-col items-center justify-center min-h-[70vh]">
-                <div className="animate__animated animate__zoomIn shadow-gray-400 shadow-[0_2px_10px_rgba(0,0,0,0.1)] rounded-lg max-sm:w-[90%] px-5 lg:px-10 py-6">
-                    <h1 className="text-2xl font-bold text-blue-500 text-center">Login</h1>
-                    <Form onSubmit={onSubmit} className="flex lg:w-96 flex-col gap-4" >
-                        {/* email */}
-                        <TextField
-                            isRequired
-                            name="email"
-                            type="email"
-                            validate={(value) => {
-                                if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
-                                    return "Please enter a valid email address";
-                                }
-                                return null;
-                            }}
-                        >
-                            <Label>Email</Label>
-                            <Input placeholder="john@example.com" />
-                            <FieldError />
-                        </TextField>
-                        {/* password */}
+  const handleGoogleSignIn = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
+  };
 
-                        <TextField className="w-full"
-                            name="password"
-                            isRequired
-                            minLength={8}
-                            type="password"
-                            validate={(value) => {
-                                if (!value) {
-                                    return "Password must be required";
-                                }
-                                if (value.length < 8) {
-                                    return "Password must be at least 8 characters";
-                                }
-                                return null;
-                            }}
-                        >
-                            <Label>Password</Label>
-                            <InputGroup>
-                                <InputGroup.Input
-                                    placeholder="Enter Your Password"
-                                    className="w-full"
-                                    type={isVisible ? "text" : "password"}
-                                />
-                                <InputGroup.Suffix className="pr-0">
-                                    <Button
-                                        isIconOnly
-                                        aria-label={isVisible ? "Hide password" : "Show password"}
-                                        size="sm"
-                                        variant="ghost"
-                                        onPress={() => setIsVisible(!isVisible)}
-                                    >
-                                        {isVisible ? <BsEye className="size-4" /> : <BsEyeSlash className="size-4" />}
-                                    </Button>
-                                </InputGroup.Suffix>
-                            </InputGroup>
-                            <FieldError />
-                        </TextField>
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-50 via-white to-blue-50 px-4">
 
-                        <div className="flex gap-2 mt-4">
-                            <Button type="submit" className="w-full" color="primary">
-                                <FaCheck />
-                                Login
-                            </Button>
+      <div className="w-full max-w-md bg-white border border-default-200 shadow-xl rounded-3xl p-8">
 
-                            <Button type="reset" variant="flat" className="w-full text-red-500">
-                                <MdRefresh />
-                                Reset
-                            </Button>
-                        </div>
-                    </Form>
+        {/* HEADER */}
+        <div className="text-center mb-6">
 
-                    <div className="flex items-center my-4">
-                        <div className="flex-grow border-t border-gray-300"></div>
-                        <span className="mx-4 text-gray-500 text-sm">OR</span>
-                        <div className="flex-grow border-t border-gray-300"></div>
-                    </div>
-                    <Button onClick={handleGoogleSignIn} variant="outline" className="w-full">
-                        <FcGoogle />  Continue with Google
-                    </Button>
-                    <p className="text-center py-2 text-slate-400">Don't have an account? <Link href="/register" className="text-blue-500 hover:underline">Register here</Link></p>
-
-                </div>
+          <div className="flex justify-center mb-3">
+            <div className="bg-emerald-100 text-emerald-600 p-4 rounded-full">
+              <FaPaw className="text-3xl" />
             </div>
+          </div>
+
+          <h1 className="text-3xl font-bold">
+            Welcome Back
+          </h1>
+
+          <p className="text-sm text-default-500 mt-2">
+            Login to continue your pet adoption journey 🐶🐱
+          </p>
+
         </div>
-    );
+
+        {/* FORM */}
+        <Form onSubmit={onSubmit} className="flex flex-col gap-2">
+
+          {/* EMAIL */}
+          <TextField
+            isRequired
+            name="email"
+            type="email"
+            validate={(value) => {
+              if (
+                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)
+              ) {
+                return "Enter a valid email address";
+              }
+              return null;
+            }}
+          >
+            <Label>Email</Label>
+            <Input
+              placeholder="john@example.com"
+              variant="bordered"
+            />
+            <FieldError />
+          </TextField>
+
+          {/* PASSWORD */}
+          <TextField
+            isRequired
+            name="password"
+            validate={(value) => {
+              if (!value) return "Password is required";
+              if (value.length < 8) return "Min 8 characters";
+              return null;
+            }}
+          >
+            <Label>Password</Label>
+
+            <InputGroup>
+
+              <InputGroup.Input
+                placeholder="Enter your password"
+                type={isVisible ? "text" : "password"}
+              />
+
+              <InputGroup.Suffix>
+
+                <Button
+                  isIconOnly
+                  variant="light"
+                  size="sm"
+                  onPress={() => setIsVisible(!isVisible)}
+                >
+                  {isVisible ? <BsEye /> : <BsEyeSlash />}
+                </Button>
+
+              </InputGroup.Suffix>
+
+            </InputGroup>
+
+            <FieldError />
+          </TextField>
+
+          {/* BUTTONS */}
+          <div className=" pt-2">
+
+            <Button
+              type="submit"
+              className="w-full bg-emerald-500 text-white font-semibold"
+            >
+              <FaSignInAlt />
+              Login
+            </Button>
+
+          </div>
+
+        </Form>
+
+        {/* DIVIDER */}
+        <div className="flex items-center my-6">
+
+          <div className="flex-grow border-t border-default-200"></div>
+
+          <span className="mx-4 text-sm text-default-400">
+            OR
+          </span>
+
+          <div className="flex-grow border-t border-default-200"></div>
+
+        </div>
+
+        {/* GOOGLE LOGIN */}
+        <Button
+          onClick={handleGoogleSignIn}
+          variant="bordered"
+          className="w-full"
+        >
+          <FcGoogle className="text-xl" />
+          Continue with Google
+        </Button>
+
+        {/* FOOTER */}
+        <p className="text-center text-sm text-default-500 mt-4">
+          Don’t have an account?{" "}
+          <Link href="/signup" className="text-emerald-500 font-medium">
+            Register here
+          </Link>
+        </p>
+
+      </div>
+    </div>
+  );
 };
 
 export default LoginPage;

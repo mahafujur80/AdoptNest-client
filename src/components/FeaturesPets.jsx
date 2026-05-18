@@ -1,8 +1,11 @@
+import { getFeturePets } from '@/lib/data';
 import { Button } from '@heroui/react';
 import Link from 'next/link';
 import React from 'react';
+import PetCard from './PetCard';
 
-const FeaturesPets = () => {
+const FeaturesPets = async() => {
+    const petsData = await getFeturePets()
     return (
         <section className="py-16 bg-gradient-to-br from-gray-50 to-white">
             <div className="container mx-auto px-6">
@@ -22,7 +25,13 @@ const FeaturesPets = () => {
                        <div> <Link href='/all-pets' ><Button variant='outline'>View All Pets</Button></Link></div>
                     </div>
                 </div>
+          
 
+          <div className='grid md:gird-cols-2 lg:grid-cols-3 gap-6'>
+            {
+            petsData.map(pet => <PetCard key={pet._id} pet={pet}/>)
+            }
+          </div>
 
 
             </div>
