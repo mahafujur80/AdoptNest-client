@@ -1,18 +1,28 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { Avatar } from "@heroui/react";
 import Link from "next/link";
-import { FaUserCircle } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
-export default function ProfileDropdown() {
+export default function ProfileDropdown({user}) {
+const router = useRouter()
+
+    const handleLogOut = async()=>{
+        authClient.signOut()
+        toast.success('Hope You Will Be Back')
+        router.push('/')
+
+    }
     return (
         <div className="relative group inline-block">
 
             {/* profile icon */}
             <button className="flex items-center">
                 <Avatar>
-                    <Avatar.Image alt="John Doe" src="https://img.heroui.chat/image/avatar?w=400&h=400&u=3" />
-                    <Avatar.Fallback>JD</Avatar.Fallback>
+                    <Avatar.Image alt="John Doe" src={user?.image} />
+                    <Avatar.Fallback>{user?.name[0]}</Avatar.Fallback>
                 </Avatar>
             </button>
 
@@ -22,8 +32,8 @@ export default function ProfileDropdown() {
                       transition-all duration-200">
 
                 <div className="border-b pb-2 mb-2">
-                    <p className="font-semibold">User Name Munna</p>
-                    <p className="text-sm text-gray-500">munna@gmail.com</p>
+                    <p className="font-semibold truncate">{user?.name}</p>
+                    <p className="text-sm text-gray-500 truncate">{user?.email}</p>
                 </div>
 
                 <Link
@@ -33,7 +43,7 @@ export default function ProfileDropdown() {
                     Dashboard
                 </Link>
 
-                <button className="w-full rounded-lg px-3 py-2 text-left text-red-500 hover:bg-red-50">
+                <button onClick={handleLogOut} className="w-full rounded-lg px-3 py-2 text-left text-red-500 hover:bg-red-50">
                     Logout
                 </button>
 

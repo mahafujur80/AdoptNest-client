@@ -1,14 +1,14 @@
 'use client'
 
 import { useState } from "react";
-import {  Button } from "@heroui/react";
+import { Button } from "@heroui/react";
 import { FaPaw } from "react-icons/fa";
 import Link from 'next/link'
 import ProfileDropdown from "./DropDownProlile";
 import { authClient } from "@/lib/auth-client";
 
 export default function NavBar() {
-  const {data:session} = authClient.useSession()
+  const { data: session, isPending } = authClient.useSession()
   const user = session?.user;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -16,7 +16,7 @@ export default function NavBar() {
     <nav className="relative sticky top-0 z-40 w-full border-b border-separator bg-background/70 backdrop-blur-lg">
       <header className=" mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         <div className="flex items-center gap-4">
-          
+
           <div className="flex items-center gap-3">
             <FaPaw />
             <p className="font-bold">AdoptNest</p>
@@ -32,17 +32,27 @@ export default function NavBar() {
             </Link>
           </li>
         </ul>
+
         <div className="hidden items-center gap-4 md:flex">
-          <Link href="/login"><Button variant='outline'>Login</Button></Link>
-          <Link href="/signup"><Button className=" bg-emerald-500 text-white rounded-lg  font-semibold hover:bg-emerald-600 transition shadow-md hover:shadow-lg">Create Profile</Button></Link>
-          
-         {/* dropdown  */}
-         <ProfileDropdown/>
+          {
+            (!isPending && !user) ?
+              <>
+                <Link href="/login"><Button variant='outline'>Login</Button></Link>
+                <Link href="/signup"><Button className=" bg-emerald-500 text-white rounded-lg  font-semibold hover:bg-emerald-600 transition shadow-md hover:shadow-lg">Create Profile</Button></Link>
+              </>
+              :
+              <>
+                <ProfileDropdown user={user} />
+              </>
+          }
         </div>
 
-
         {/* menue btn */}
-        <button
+        <div className="flex items-center gap-5 md:hidden">
+          
+            <ProfileDropdown user={user}/>
+        
+          <button
             className="md:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
@@ -72,28 +82,31 @@ export default function NavBar() {
               )}
             </svg>
           </button>
+        </div>
       </header>
 
       {/* moblie menu  */}
-      {isMenuOpen && (
-        <div className="absolute top-16   bg-white w-full border-t border-separator md:hidden">
-          <ul className="flex flex-col gap-2 p-4">
-             <li>
-            <Link href="/">Home</Link>
-          </li>
-          <li>
-            <Link href="/all-pets" className="font-medium " >
-              All Pets
-            </Link>
-          </li>
+      {
+        isMenuOpen && (
+          <div className="absolute top-16   bg-white w-full border-t border-separator md:hidden">
+            <ul className="flex flex-col gap-2 p-4 text-center">
+              <li>
+                <Link href="/" className="font-medium block">Home</Link>
+              </li>
+              <li>
+                <Link href="/all-pets" className="font-medium block " >
+                  All Pets
+                </Link>
+              </li>
 
-            <li className="mt-4 flex flex-col gap-2 border-t border-separator pt-4">
-              <Link href="/login" > <Button className="w-full">Login</Button></Link>
-              <Link href="/signup" > <Button className="w-full">Sign Up</Button></Link>
-            </li>
-          </ul>
-        </div>
-      )}
-    </nav>
+              <li className="mt-4 flex flex-col gap-2 border-t border-separator pt-4">
+                <Link href="/login" > <Button className="w-full">Login</Button></Link>
+                <Link href="/signup" > <Button className="w-full">Sign Up</Button></Link>
+              </li>
+            </ul>
+          </div>
+        )
+      }
+    </nav >
   );
 }

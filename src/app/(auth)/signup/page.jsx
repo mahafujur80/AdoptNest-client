@@ -61,37 +61,30 @@ const RegisterPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-50 via-white to-blue-50 px-4 py-10">
-
       <div className="w-full max-w-md rounded-3xl border border-default-200 bg-white shadow-xl p-8">
-
         {/* HEADER */}
         <div className="text-center mb-6">
-
           <div className="flex justify-center mb-3">
             <div className="bg-emerald-100 text-emerald-500 p-4 rounded-full">
               <FaPaw className="text-3xl" />
             </div>
           </div>
-
           <h1 className="text-3xl font-bold">
             Create Account
           </h1>
-
           <p className="text-default-500 mt-2 text-sm">
             Join our pet adoption community 🐶🐱
           </p>
-
         </div>
 
         {/* FORM */}
         <Form onSubmit={onSubmit} className="flex flex-col gap-2">
-
           {/* NAME */}
           <TextField
             isRequired
             name="name"
             validate={(value) =>
-              value.length < 3 ? "Name must be at least 3 characters" : null
+            value.length < 3 ? "Name must be at least 3 characters" : null
             }
           >
             <Label>Full Name</Label>
@@ -133,7 +126,6 @@ const RegisterPage = () => {
           {/* PASSWORD */}
           <TextField
             isRequired
-            name="password"
             validate={(value) => {
               if (value.length < 6) return "Min 6 characters";
               if (!/[A-Z]/.test(value)) return "Add uppercase letter";
@@ -145,6 +137,7 @@ const RegisterPage = () => {
 
             <InputGroup>
               <InputGroup.Input
+                 name="password"
                 type={isVisible ? "text" : "password"}
                 placeholder="Password"
               />
@@ -168,14 +161,12 @@ const RegisterPage = () => {
           {/* CONFIRM PASSWORD */}
           <TextField
             isRequired
-            name="confirmPassword"
             validate={(value, formValues) => {
               if (value.length < 6) return "Min 6 characters";
 
               if (formValues?.password && value !== formValues.password) {
                 return "Passwords do not match";
               }
-
               return null;
             }}
           >
@@ -183,6 +174,7 @@ const RegisterPage = () => {
 
             <InputGroup>
               <InputGroup.Input
+                name="confirmPassword"
                 type={isVisible ? "text" : "password"}
                 placeholder="Confirm password"
               />
