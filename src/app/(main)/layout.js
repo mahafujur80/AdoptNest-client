@@ -1,6 +1,6 @@
 import { Geist, Geist_Mono, Outfit } from "next/font/google";
-import "./globals.css";
-import NavBar from "../components/Navbar";
+import "../globals.css";
+import NavBar from "../../components/Navbar";
 import Footer from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
 
