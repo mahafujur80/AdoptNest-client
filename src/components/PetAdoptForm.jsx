@@ -18,6 +18,7 @@ export default function PetAdoptForm({ pet }) {
         const finalData = {
             petId: pet?._id,
             petName: adoptData.petName,
+            imageUrl:pet?.imageUrl,
             ownerEmail: pet?.ownerEmail,
             requesterName: adoptData.userName,
             requesterEmail: adoptData.email,

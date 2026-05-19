@@ -24,7 +24,7 @@ export default function DashboardNavbar() {
                     <Link href='/'>
                         <div className="flex items-center gap-3">
                             <FaPaw />
-                            <p className="font-bold text-2xl">AdoptNest</p>
+                            <p className="font-bold text-2xl">Adopt<span className='text-emerald-500'>Nest</span></p>
                         </div>
                     </Link>
                 </div>
