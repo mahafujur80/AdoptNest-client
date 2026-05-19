@@ -15,3 +15,9 @@ export const getSinglePet = async(id)=>{
     const data = await res.json()
     return data;
 }
+// get my adopt request by user id
+export const getMyAdoptRequest = async()=>{
+     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pets/${id}`)
+    const data = await res.json()
+    return data;
+}

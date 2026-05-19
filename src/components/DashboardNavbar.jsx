@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Avatar, Button } from "@heroui/react";
 import { FaPaw } from "react-icons/fa";
 import Link from 'next/link'
-import ProfileDropdown from "./DropDownProlile";
 import { authClient } from "@/lib/auth-client";
 import { usePathname } from "next/navigation";
 import { DashboardDrawer } from "./MenuDrawer";
@@ -22,10 +21,12 @@ export default function DashboardNavbar() {
             <header className=" mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
                 <div className="flex items-center gap-4">
 
-                    <div className="flex items-center gap-3">
-                        <FaPaw />
-                        <p className="font-bold">AdoptNest</p>
-                    </div>
+                    <Link href='/'>
+                        <div className="flex items-center gap-3">
+                            <FaPaw />
+                            <p className="font-bold text-2xl">AdoptNest</p>
+                        </div>
+                    </Link>
                 </div>
 
 
@@ -77,7 +78,7 @@ export default function DashboardNavbar() {
                         </svg>
                     </button> */}
                     <div className="md:hidden">
-                        <DashboardDrawer/>
+                        <DashboardDrawer />
                     </div>
                 </div>
             </header>
