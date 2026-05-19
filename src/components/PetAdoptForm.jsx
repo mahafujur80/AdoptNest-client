@@ -2,16 +2,52 @@
 
 import { authClient } from "@/lib/auth-client";
 import { Input, Button, Label, TextArea, Description, FieldError, Fieldset, TextField, FieldGroup, Form, Calendar, DatePicker, DateField } from "@heroui/react";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function PetAdoptForm({ pet }) {
 
     const { data: session } = authClient.useSession();
     const user = session?.user;
-    console.log(user, 'user')
+    const [date, setDate] = useState(null)
+    console.log(date?.toString())
+    const handleAdopt = async (e) => {
+        e.preventDefault()
+        const formData = new FormData(e.currentTarget);
+        const adoptData = Object.fromEntries(formData.entries());
+        const finalData = {
+            petId: pet?._id,
+            petName: adoptData.petName,
+            ownerEmail: pet?.ownerEmail,
+            requesterName: adoptData.userName,
+            requesterEmail: adoptData.email,
+            userId:user?.id,
+            adoptingDate: adoptData?.date,
+            message: adoptData?.message,
+            status: "pending",
+            createdAt: new Date()
+        }
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/adopted`, {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(finalData)
+        })
+        const result = await res.json()
+        if(result.error){
+            toast.error(result.error)
+            return
+        }
+        if(result.acknowledged){
+            toast.success('Your Request Is Success')
+        }
+
+        console.log(result)
+    }
 
     return (
         <div className='py-5 border rounded-2xl border-green-300'>
-            <Form className=" px-5" >
+            <Form onSubmit={handleAdopt} className=" px-5" >
                 <Fieldset>
                     <Fieldset.Legend>Request To Adopt Pet</Fieldset.Legend>
                     <Description>Fill out this form and the owner will review your request</Description>
@@ -51,6 +87,8 @@ export default function PetAdoptForm({ pet }) {
                             isRequired
                             className="w-full"
                             name="date"
+                            value={date}
+                            onChange={setDate}
                         >
                             <Label>Adopting Date</Label>
                             <DateField.Group fullWidth>
@@ -89,7 +127,7 @@ export default function PetAdoptForm({ pet }) {
 
                         <TextField
                             isRequired
-                            name="bio"
+                            name="message"
                             validate={(value) => {
                                 if (value.length < 10) {
                                     return "Bio must be at least 10 characters";
