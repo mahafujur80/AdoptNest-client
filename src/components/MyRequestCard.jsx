@@ -2,8 +2,10 @@ import { Button, Chip } from '@heroui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import { MyReqDeleteDialog } from './MyReqDeleteDialog';
 
 const MyRequestCard = ({ adopt }) => {
+
     return (
         <div>
             <div className=" mx-auto">
@@ -30,7 +32,7 @@ const MyRequestCard = ({ adopt }) => {
                         </div>
 
                         {/* Status */}
-                        <Chip color={`${adopt?.status === 'pending' ? 'warning' : adopt?.status === 'rejected' ? 'danger' : 'success'}`}>
+                        <Chip color={`${adopt?.status === 'pending' ? 'warning' : adopt?.status === 'Rejected' ? 'danger' : 'success'}`}>
                             {adopt?.status}
                         </Chip>
                     </div>
@@ -71,9 +73,7 @@ const MyRequestCard = ({ adopt }) => {
                             </Button>
                         </Link>
 
-                        <Button variant='outline' className="w-full text-sm  rounded-lg text-danger border-danger font-medium">
-                            Cancel
-                        </Button>
+                        <MyReqDeleteDialog pet={adopt}/>
                     </div>
                 </div>
             </div>

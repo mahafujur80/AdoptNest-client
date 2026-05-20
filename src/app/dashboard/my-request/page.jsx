@@ -11,7 +11,7 @@ const MyRequestPage = async() => {
     })
     const user = session?.user;
     const userId = user?.id;
-
+    console.log(userId)
     const myAdoptReq = await getMyAdoptRequest(userId)
 
 

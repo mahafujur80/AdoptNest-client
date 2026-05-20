@@ -17,7 +17,20 @@ export const getSinglePet = async(id)=>{
 }
 // get my adopt request by user id
 export const getMyAdoptRequest = async(userId)=>{
-     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/adopted/${userId}`)
+     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/adopted/user/${userId}`)
     const data = await res.json()
     return data;
+}
+// get pet request for pet owern
+export const getAdoptRequest = async(petId)=>{
+     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/adopted/${petId}`)
+    const data = await res.json()
+    return data;
+}
+
+//get all pet by pet owner
+export const getMyOwnPet = async(userId)=>{
+const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pets/user/${userId}`)
+const data = await res.json();
+return data;
 }

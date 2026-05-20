@@ -14,7 +14,7 @@ export default function DashboardNavbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const pathName = usePathname()
-    console.log(pathName)
+
 
     return (
         <nav className="relative sticky top-0 z-40 w-full border-b border-separator bg-background/70 backdrop-blur-lg">

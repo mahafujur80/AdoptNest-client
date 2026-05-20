@@ -1,6 +1,7 @@
 import DashboardNavbar from "@/components/DashboardNavbar";
 import "../globals.css";
 import DashboardNavigation from "@/components/DashboardNavigation";
+import { Toaster } from "react-hot-toast";
 
 export default function RootLayout({ children }) {
     return (
@@ -20,9 +21,9 @@ export default function RootLayout({ children }) {
                     <main className="flex-1 overflow-y-auto p-5">
                         {children}
                     </main>
-
+                        
                 </div>
-
+              <Toaster/>
             </body>
         </html>
     );

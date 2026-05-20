@@ -1,12 +1,56 @@
 'use client'
+import { authClient } from '@/lib/auth-client';
 import { Button, Description, FieldError, Form, Input, Label, ListBox, TextField, Select, TextArea } from '@heroui/react';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
-const page = () => {
-    const handleAddPet = (e) => {
+
+const AddPetPage = () => {
+    const router = useRouter();
+
+    const { data: session } = authClient.useSession();
+    const user = session?.user;
+
+    const handleAddPet = async (e) => {
         e.preventDefault()
         const formData = new FormData(e.currentTarget);
-        const petData = Object.fromEntries(formData.entries())
-        console.log(petData)
+        const petObj = Object.fromEntries(formData.entries())
+
+        const petData = {
+            petName: petObj?.petName,
+            species: petObj?.species,
+            breed: petObj?.breed,
+            age: petObj?.petAge,
+            gender: petObj?.gender,
+            imageUrl: petObj?.imageUrl,
+            healthStatus: petObj?.healthStatus,
+            vaccinationStatus: petObj?.vaccinationStatus,
+            location: petObj?.location,
+            description: petObj?.description,
+            ownerEmail: petObj?.email,
+            userId: user?.id,
+            adoptionFee: petObj?.adoptionFee,
+            status: 'Available',
+            createAt: new Date(),
+        }
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pets`, {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(petData)
+        })
+
+        const data = await res.json()
+
+        if (!data || !data.acknowledged) {
+            toast.error('Something is wrong !')
+        }
+        if (data.acknowledged) {
+            toast.success('New Pet Added Successfully')
+            setTimeout(() => {
+                router.push('/dashboard/my-listing');
+            }, 500);
+        }
     }
     return (
         <div className='lg:px-10 '>
@@ -41,7 +85,7 @@ const page = () => {
                     </TextField>
 
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-                        <Select isRequired name='species ' placeholder="Select your pet">
+                        <Select isRequired name='species' placeholder="Select your pet">
                             <Label>Species</Label>
                             <Select.Trigger>
                                 <Select.Value />
@@ -168,11 +212,13 @@ const page = () => {
                     </div>
 
                     <TextField
+                        key={user?.email}
                         isRequired
                         isReadOnly
+                        defaultValue={user?.email}
                         name="email"
                         type="email"
-                     
+
                     >
                         <Label>Owner Email</Label>
                         <Input placeholder="john@example.com" />
@@ -227,11 +273,11 @@ const page = () => {
                     </TextField>
 
 
-                    <div className="flex gap-2">
-                        <Button type="submit">
+                    <div className="flex gap-2 py-5">
+                        <Button type="submit" className="w-full  bg-emerald-500 text-white rounded-lg  hover:bg-emerald-600 transition shadow-md hover:shadow-lg">
                             Submit Pet
                         </Button>
-                        <Button type="reset" variant="secondary">
+                        <Button type="reset" variant="secondary" className="w-full rounded-lg text-danger">
                             Reset
                         </Button>
                     </div>
@@ -242,4 +288,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default AddPetPage;
