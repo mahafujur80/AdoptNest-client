@@ -1,3 +1,4 @@
+import NoListing from '@/components/Empty/No-Listing';
 import MyListingCard from '@/components/MyListingCard';
 import { auth } from '@/lib/auth';
 import { getMyOwnPet } from '@/lib/data';
@@ -62,11 +63,16 @@ const page = async () => {
             </div>
 
 
-            <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-5'>
+            {
+                (myPet?.length === 0)? 
+                <NoListing/> 
+                :
+                <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-5'>
                 {
                     myPet.map(pet => <MyListingCard key={pet._id} pet={pet} />)
                 }
             </div>
+            }
         </div>
     );
 };

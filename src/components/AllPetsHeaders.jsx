@@ -3,7 +3,7 @@
 import { Input, Select, Label, ListBox, Button } from "@heroui/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { BiFilter, BiSearch } from "react-icons/bi";
+import {  BiSearch } from "react-icons/bi";
 
 const AllPetsHeader = () => {
     const categories = ["All","Cat","Dog","Bird","Fish", "Hamster","Turtle","Rabbit"]
@@ -58,9 +58,7 @@ const AllPetsHeader = () => {
                 <Input
                     onChange={(e)=>setSearch(e.target.value)}
                     value={search}
-                    size="lg"
                     placeholder="Search pets..."
-                    startContent={<BiSearch size={18} />}
                     className="w-full rounded-r-none"
                 />
                 <Button onClick={handleSearch} className="bg-emerald-500 text-white rounded-lg rounded-l-none text-sm font-semibold hover:bg-emerald-600 transition shadow-md hover:shadow-lg text-center">Search</Button>
