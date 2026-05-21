@@ -6,14 +6,9 @@ import { FaPlusCircle } from "react-icons/fa";
 import DashboardNavigation from "./DashboardNavigation";
 
 export function DashboardDrawer() {
-  const navItems = [
-    {icon: FaPlusCircle, label: "Home"},
-    {icon: FaPlusCircle, label: "Search"},
-    {icon: FaPlusCircle, label: "Notifications"},
-  ];
 
   return (
-    <Drawer className="md:hidden">
+    <Drawer className="md:hidden ">
       <Button variant="outline" className='border-none rounded-lg'>
         <RiMenuFold2Fill className='w-6 h-6' />
       </Button>

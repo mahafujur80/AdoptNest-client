@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { FaPlusCircle, FaClipboardList } from 'react-icons/fa';
+import { FaPlusCircle, FaClipboardList, FaHome } from 'react-icons/fa';
 import { MdPets } from 'react-icons/md';
 
 const DashboardNavigation = () => {
@@ -10,6 +10,11 @@ const DashboardNavigation = () => {
     const pathname = usePathname();
 
     const navLinks = [
+        {
+            title: 'Home',
+            href: '/',
+            icon: <FaHome size={20} />
+        },
         {
             title: 'Add Pet',
             href: '/dashboard/add-pets',

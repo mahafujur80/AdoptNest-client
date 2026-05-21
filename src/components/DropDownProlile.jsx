@@ -31,7 +31,7 @@ export default function ProfileDropdown({ user }) {
             </button>
 
             {open && (
-                <div className="absolute right-0 mt-3 w-52 rounded-xl border bg-white p-2 shadow-lg">
+                <div className="absolute z-100 right-0 mt-3 w-52 rounded-xl border bg-white p-2 shadow-lg">
 
                     <div className="border-b pb-2 mb-2">
                         <p className="font-semibold truncate">{user?.name}</p>

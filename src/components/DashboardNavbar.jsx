@@ -24,7 +24,10 @@ export default function DashboardNavbar() {
                     <Link href='/'>
                         <div className="flex items-center gap-3">
                             <FaPaw />
-                            <p className="font-bold text-2xl">Adopt<span className='text-emerald-500'>Nest</span></p>
+                            <p className="font-bold text-2xl md:text-3xl">Adopt<span className='text-emerald-500'>Nest</span></p>
+                            <div className="inline-block mb-3 px-4 py-1  bg-emerald-100 text-emerald-600 rounded-full text-sm font-semibold">
+                                DASHBOARD
+                            </div>
                         </div>
                     </Link>
                 </div>

@@ -12,9 +12,9 @@ const FeaturesPets = async() => {
 
                 {/* Section Header */}
                 <div className="mb-12">
-                    <div className='flex items-center justify-between'>
+                    <div className='flex max-md:flex-col items-center justify-between'>
                         <div>
-                            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                            <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">
                                 Ready for <span className=" text-emerald-600">Adoption</span>
                             </h2>
                             <p className="text-gray-600 max-w-2xl mx-auto">

@@ -37,7 +37,7 @@ const WhyAdoptSection = () => {
           <div className="inline-block mb-3 px-4 py-1 bg-emerald-100 text-emerald-600 rounded-full text-sm font-semibold">
             Why Choose Adoption
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">
             Why Adopt a Pet?
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">

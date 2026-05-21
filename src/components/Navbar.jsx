@@ -18,8 +18,8 @@ export default function NavBar() {
         <div className="flex items-center gap-4">
 
           <div className="flex items-center gap-3">
-            <FaPaw />
-            <p className="font-bold">AdoptNest</p>
+            <FaPaw  className=" bg-emerald-100 text-emerald-600 text-sm w-10 h-10 p-2 rounded-full" />
+            <p className="font-bold text-2xl md:text-3xl">Adop<span className="text-emerald-500">Nest</span></p>
           </div>
         </div>
         <ul className="hidden items-center gap-4 md:flex">
@@ -88,7 +88,7 @@ export default function NavBar() {
       {/* moblie menu  */}
       {
         isMenuOpen && (
-          <div className="absolute top-16   bg-white w-full border-t border-separator md:hidden">
+          <div className="absolute top-16 bg-gray-200 w-full  border-t border-b-rounded-lg border-separator md:hidden">
             <ul className="flex flex-col gap-2 p-4 text-center">
               <li>
                 <Link href="/" className="font-medium block">Home</Link>

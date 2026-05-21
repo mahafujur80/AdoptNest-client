@@ -4,14 +4,14 @@ import Link from "next/link";
 const Banner = () => {
     return (
         <section className="min-h-[70vh] flex items-center relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-blue-50">
-            <div className="border container mx-auto px-6 py-16">
+            <div className="container mx-auto px-6 py-16">
                 <div className="flex flex-col lg:flex-row items-center gap-8">
 
                     {/* Left Side - Text Content */}
                     <div className="flex-1 text-center lg:text-left">
                         {/* Badge */}
                         <div className="inline-block mb-4 px-3 py-1 bg-emerald-100 text-emerald-600 rounded-full text-xs font-semibold">
-                            🐾 Join the Movement
+                          Join the Movement
                         </div>
 
                         {/* Title */}

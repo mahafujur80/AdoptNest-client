@@ -52,10 +52,10 @@ const PetCareTips = () => {
         
         {/* Section Header */}
         <div className="text-center mb-12">
-          <div className="inline-block mb-3 px-4 py-1 bg-blue-100 text-blue-600 rounded-full text-sm font-semibold">
+          <div className="inline-block mb-3 px-4 py-1  bg-emerald-100 text-emerald-600 rounded-full text-sm font-semibold">
             Expert Advice
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">
             Pet Care Tips
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
@@ -87,7 +87,7 @@ const PetCareTips = () => {
         </div>
         
         {/* Video/Resource Banner */}
-        <div className="mt-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl p-6 text-white">
+        <div className="mt-12 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl  text-white  p-6 ">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div>
               <h3 className="text-xl font-bold mb-1">Need More Help?</h3>
