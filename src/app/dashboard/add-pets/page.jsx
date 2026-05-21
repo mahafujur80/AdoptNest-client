@@ -10,12 +10,12 @@ const AddPetPage = () => {
 
     const { data: session } = authClient.useSession();
     const user = session?.user;
-
+    
     const handleAddPet = async (e) => {
         e.preventDefault()
         const formData = new FormData(e.currentTarget);
         const petObj = Object.fromEntries(formData.entries())
-
+        
         const petData = {
             petName: petObj?.petName,
             species: petObj?.species,
@@ -34,22 +34,26 @@ const AddPetPage = () => {
             createAt: new Date(),
         }
 
+        const {data:tokenData} = await authClient.token();
+        console.log(tokenData)
+        
+
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pets`, {
             method: 'POST',
-            headers: { 'content-type': 'application/json' },
+            headers: { 'content-type': 'application/json',
+               authorization: `Bearer ${tokenData?.token}`
+             },
             body: JSON.stringify(petData)
         })
 
         const data = await res.json()
 
-        if (!data || !data.acknowledged) {
+        if (!data || !data.insertedId) {
             toast.error('Something is wrong !')
         }
-        if (data.acknowledged) {
+        if (data.insertedId) {
             toast.success('New Pet Added Successfully')
-            setTimeout(() => {
-                router.push('/dashboard/my-listing');
-            }, 500);
+            router.push('/dashboard/my-listing')
         }
     }
     return (

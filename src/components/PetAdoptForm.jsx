@@ -28,10 +28,14 @@ export default function PetAdoptForm({ pet }) {
             status: "pending",
             createdAt: new Date()
         }
+        //jwt token
+        const {data:tokenData} = await authClient.token()
 
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/adopted`, {
             method: 'POST',
-            headers: { 'content-type': 'application/json' },
+            headers: { 'content-type': 'application/json',
+                authorization: `Bearer ${tokenData?.token}`
+             },
             body: JSON.stringify(finalData)
         })
         const result = await res.json()
@@ -143,7 +147,7 @@ export default function PetAdoptForm({ pet }) {
                         </TextField>
                     </FieldGroup>
                     <Fieldset.Actions>
-                        <Button type="submit" className='w-full  bg-emerald-500 text-white rounded-lg font-semibold hover:bg-emerald-600 transition shadow-md hover:shadow-lg text-center '>
+                        <Button type="submit"   className={`w-full  bg-emerald-500 text-white rounded-lg font-semibold hover:bg-emerald-600 transition shadow-md hover:shadow-lg text-center`}>
                             Request To Adopt
                         </Button>
                     </Fieldset.Actions>

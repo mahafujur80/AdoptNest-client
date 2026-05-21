@@ -34,12 +34,6 @@ const Banner = () => {
                             >
                                 Adopt Now →
                             </Link>
-                            <Link
-                                href="/about"
-                                className="px-6 py-2.5 border-2 border-emerald-500 text-emerald-500 rounded-lg text-sm font-semibold hover:bg-emerald-50 transition text-center"
-                            >
-                                Learn More
-                            </Link>
                         </div>
 
                         {/* Simple Stats */}

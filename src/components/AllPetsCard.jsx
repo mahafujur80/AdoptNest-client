@@ -25,7 +25,7 @@ const AllPetsCard = ({pet}) => {
             </div>
             <div className="flex justify-center gap-3 py-5 items-center  border-t-1 border-gray-300">
                 <Link href={`/all-pets/${pet?._id}`}><Button variant='outline' className="w-full">View Details</Button></Link>
-                <Link href="#"><Button className='w-full  bg-emerald-500 text-white text-sm font-semibold hover:bg-emerald-600 transition shadow-md hover:shadow-lg text-center' variant="outline">Adopt Now</Button></Link>
+                <Link href={`/all-pets/${pet?._id}`}><Button className='w-full  bg-emerald-500 text-white text-sm font-semibold hover:bg-emerald-600 transition shadow-md hover:shadow-lg text-center' variant="outline">Adopt Now</Button></Link>
             </div>
         </div>
     );

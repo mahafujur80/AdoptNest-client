@@ -1,16 +1,17 @@
 "use client";
 
-import { Button, FieldError, Form, Input, Label, Modal, Surface, TextField,Select, ListBox, TextArea, Description } from "@heroui/react";
+import { authClient } from "@/lib/auth-client";
+import { Button, FieldError, Form, Input, Label, Modal, Surface, TextField, Select, ListBox, TextArea, Description } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { FaUserEdit } from "react-icons/fa";
 
 
 
-export function UpdateModal({pet}) {
+export function UpdateModal({ pet }) {
     const router = useRouter()
     // console.log(pet)
-    const updatePet = async(e)=>{
+    const updatePet = async (e) => {
         e.preventDefault()
         const formData = new FormData(e.currentTarget);
         const formObj = Object.fromEntries(formData.entries());
@@ -18,20 +19,27 @@ export function UpdateModal({pet}) {
             ...formObj,
             userId: pet?.userId
         }
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pets/${pet?._id}`,{
-        method: 'PATCH',
-        headers: {'content-type': "application/json"},
-        body: JSON.stringify(petData)
-    })
-    const data = await res.json()
-    if(data.modifiedCount === !1){
-       toast.error('Pet Update Fail')
-      return
-    }
-     if(data.modifiedCount === 1){
-        toast.success('Pet Update Successful')
-        router.refresh()
-     }
+
+        //jwt token
+        const { data: tokenData } = await authClient.token()
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pets/${pet?._id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': "application/json",
+                authorization: `Bearer ${tokenData?.token}`
+            },
+            body: JSON.stringify(petData)
+        })
+        const data = await res.json()
+        if (data.modifiedCount === !1) {
+            toast.error('Pet Update Fail')
+            return
+        }
+        if (data.modifiedCount === 1) {
+            toast.success('Pet Update Successful')
+            router.refresh()
+        }
     }
     return (
         <Modal>
@@ -48,7 +56,7 @@ export function UpdateModal({pet}) {
                         </Modal.Header>
                         <Modal.Body className="p-6">
                             <Surface variant="default">
-                                <Form onSubmit={updatePet}  className="flex flex-col gap-2" >
+                                <Form onSubmit={updatePet} className="flex flex-col gap-2" >
                                     <TextField
                                         isRequired
                                         name="petName"
@@ -264,10 +272,10 @@ export function UpdateModal({pet}) {
 
 
                                     <div className="flex gap-2 py-5">
-                                        <Button slot="close"  type="submit" className="w-full  bg-emerald-500 text-white rounded-lg  hover:bg-emerald-600 transition shadow-md hover:shadow-lg">
+                                        <Button slot="close" type="submit" className="w-full  bg-emerald-500 text-white rounded-lg  hover:bg-emerald-600 transition shadow-md hover:shadow-lg">
                                             Update Pet Info
                                         </Button>
-                                        <Button slot="close"  type="reset" variant="secondary" className="w-full rounded-lg text-danger">
+                                        <Button slot="close" type="reset" variant="secondary" className="w-full rounded-lg text-danger">
                                             Reset
                                         </Button>
                                     </div>

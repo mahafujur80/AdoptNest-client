@@ -1,5 +1,6 @@
 import Image from "next/image";
 import PetAdoptForm from "./PetAdoptForm";
+import AlreadyAdoptedNotice from "./AdoptionClose";
 
 const PetDetailsPage = async({pet}) => {
 
@@ -18,7 +19,7 @@ const PetDetailsPage = async({pet}) => {
 
                             {/* Price Badge on Image */}
                             <div className="absolute bottom-6 right-6 bg-green-100 px-4 py-2 rounded-full">
-                                <span className="text-green-700 text-sm font-semibold">✓ Available</span>
+                                <span className={`${pet?.status === "Adopted"? 'text-red-500': 'text-green-500'} text-sm font-semibold`}>{pet?.status}</span>
                             </div>
                         </div>
 
@@ -108,7 +109,9 @@ const PetDetailsPage = async({pet}) => {
                     </div>
                     {/* side form */}
                     <div>
-                        <PetAdoptForm pet={pet}/>
+                        {
+                         pet?.status === "Adopted"? <AlreadyAdoptedNotice/> : <PetAdoptForm pet={pet}/>
+                        }
                     </div>
                 </div>
             </div>

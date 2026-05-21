@@ -9,8 +9,10 @@ const page = async () => {
         headers: await headers()
     })
     const userId = session?.user?.id;
-
-    const myPet = await getMyOwnPet(userId)
+ const {token} = await auth.api.getToken({
+    headers: await headers()
+ })
+    const myPet = await getMyOwnPet(userId, token)
 
     const adoptedPets = myPet.filter(
         pet => pet.status === "Adopted"

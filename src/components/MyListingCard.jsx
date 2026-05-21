@@ -6,10 +6,16 @@ import { DeleteMyListingDialog } from './DeleteMyListing';
 import { UpdateModal } from './UpdateModal';
 import { getAdoptRequest } from '@/lib/data';
 import { MyRequestModal } from './MyRequestModal';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 
 const MyListingCard = async({pet}) => {
  const petId = pet?._id?.toString()
-    const dataIs = await getAdoptRequest(petId)
+
+    const {token} = await auth.api.getToken({
+        headers: await headers()
+    })
+    const dataIs = await getAdoptRequest(petId, token)
 
 
 

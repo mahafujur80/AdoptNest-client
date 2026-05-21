@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import {AlertDialog, Button} from "@heroui/react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -8,8 +9,11 @@ export function DeleteMyListingDialog({pet}) {
       const router = useRouter()
 
      const handleDelete = async()=>{
+      const {data:tokenData} = await authClient.token()
+      
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pets/${pet?._id}`,{
-            method: 'DELETE'
+            method: 'DELETE',
+            headers:{ authorization: `Bearer ${tokenData.token}`}
         })
         const data = await res.json()
         

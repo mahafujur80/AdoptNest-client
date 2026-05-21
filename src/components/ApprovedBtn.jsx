@@ -1,12 +1,23 @@
 'use client'
+
+import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
+
 const ApprovedBtn = ({pets}) => {
+    const router = useRouter()
 
     const handleApproveBtn = async()=>{
+      //jwt token
+      const {data:tokenData} = await authClient.token()
+
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/adopted/approved/${pets?.userId}/${pets?.petId}`,{
       method: 'PATCH',
+      headers: {authorization: `Bearer ${tokenData?.token}`}
     })
     const data = await res.json()
-    console.log(data)
+    if(data.success){
+     router.refresh()
+    }
   }
 
     return (

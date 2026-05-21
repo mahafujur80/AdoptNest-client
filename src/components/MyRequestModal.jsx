@@ -2,10 +2,9 @@
 
 import { Button, Modal } from "@heroui/react";
 import ApprovedBtn from "./ApprovedBtn";
+import RejectedBtn from "./RejectedBtn";
 
 export function MyRequestModal({ adoptRequest }) {
-
-  console.log('from modal', adoptRequest)
 
 
 
@@ -79,9 +78,7 @@ export function MyRequestModal({ adoptRequest }) {
                         <div className="flex gap-3 pt-2">
                           <ApprovedBtn pets={pets} />
 
-                          <button className="w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-xl text-sm font-semibold transition">
-                            Reject
-                          </button>
+                          <RejectedBtn pets={pets}/>
                         </div>
                     }
 

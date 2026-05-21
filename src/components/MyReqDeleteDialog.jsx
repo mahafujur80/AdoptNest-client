@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import {AlertDialog, Button} from "@heroui/react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -8,15 +9,19 @@ export function MyReqDeleteDialog({pet}) {
       const router = useRouter()
 
      const handleDelete = async()=>{
+      //jwt token
+      const  {data:tokenData} = await authClient.token()
+
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/adopted/${pet?.petId}`,{
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {authorization: `Bearer ${tokenData?.token}`}
         })
         const data = await res.json()
-        if(data.acknowledged){
+        if(data.deletedCount === 1){
             toast.success('Delete Success')
             router.refresh()
         }
-        if(!data){
+        if(data.deletedCount < 1){
             toast.error('Delete Fail')
             return
         }

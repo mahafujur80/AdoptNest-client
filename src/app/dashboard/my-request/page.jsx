@@ -11,8 +11,11 @@ const MyRequestPage = async() => {
     })
     const user = session?.user;
     const userId = user?.id;
-    console.log(userId)
-    const myAdoptReq = await getMyAdoptRequest(userId)
+    const {token} = await auth.api.getToken({
+        headers: await headers()
+    })
+    
+    const myAdoptReq = await getMyAdoptRequest(userId, token)
 
 
     return (
