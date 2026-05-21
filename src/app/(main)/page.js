@@ -10,13 +10,13 @@ import WhyAdoptSection from "@/components/WhyAdoptSection";
 export default function Home() {
   return (
     <div>
-      {/* <Banner/> */}
+      <Banner/>
       <FeaturesPets/>
-      {/* <WhyAdoptSection/> */}
-      {/* <HowItWorks/> */}
+      <WhyAdoptSection/>
+      <HowItWorks/>
       <SuccessStories/>
-      {/* <PetCareTips/> */}
-      {/* <FAQ/> */}
+      <PetCareTips/>
+      <FAQ/>
     </div>
   );
 }

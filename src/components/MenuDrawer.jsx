@@ -2,7 +2,6 @@
 
 import {Button, Drawer} from "@heroui/react";
 import { RiMenuFold2Fill } from "react-icons/ri";
-import { FaPlusCircle } from "react-icons/fa";
 import DashboardNavigation from "./DashboardNavigation";
 
 export function DashboardDrawer() {
