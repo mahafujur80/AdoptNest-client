@@ -10,7 +10,7 @@ export default function PetAdoptForm({ pet }) {
     const { data: session } = authClient.useSession();
     const user = session?.user;
     const [date, setDate] = useState(null)
-    console.log(date?.toString())
+ 
     const handleAdopt = async (e) => {
         e.preventDefault()
         const formData = new FormData(e.currentTarget);
@@ -47,7 +47,7 @@ export default function PetAdoptForm({ pet }) {
             toast.success('Your Request Is Success')
         }
 
-        console.log(result)
+       
     }
 
     return (

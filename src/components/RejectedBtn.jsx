@@ -18,7 +18,7 @@ const RejectedBtn = ({ pets }) => {
         if (data) {
             router.refresh()
         }
-        console.log(data)
+      
     }
     return (
         <button onClick={handleRejectedBtn} className="w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-xl text-sm font-semibold transition">

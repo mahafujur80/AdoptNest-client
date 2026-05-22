@@ -26,7 +26,7 @@ const page = async () => {
     return (
         <div className=''>
             <div className="pb-10">
-                <h1 className="text-4xl font-bold text-emerald-400">
+                <h1 className="text-2xl md:text-4xl font-bold text-emerald-400">
                     Pet Management
                 </h1>
                 <p className="text-sm text-gray-600">

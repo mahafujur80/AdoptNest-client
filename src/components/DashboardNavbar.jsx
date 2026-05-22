@@ -11,7 +11,7 @@ import { DashboardDrawer } from "./MenuDrawer";
 export default function DashboardNavbar() {
     const { data: session, isPending } = authClient.useSession()
     const user = session?.user;
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    // const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const pathName = usePathname()
 
@@ -23,9 +23,9 @@ export default function DashboardNavbar() {
 
                     <Link href='/'>
                         <div className="flex items-center gap-3">
-                            <FaPaw />
+                           <FaPaw  className=" bg-emerald-100 text-emerald-600 text-sm w-10 h-10 p-2 rounded-full" />
                             <p className="font-bold text-2xl md:text-3xl">Adopt<span className='text-emerald-500'>Nest</span></p>
-                            <div className="inline-block mb-3 px-4 py-1  bg-emerald-100 text-emerald-600 rounded-full text-sm font-semibold">
+                            <div className="max-md:hidden inline-block mb-3 px-4 py-1  bg-emerald-100 text-emerald-600 rounded-full text-sm font-semibold">
                                 DASHBOARD
                             </div>
                         </div>
@@ -50,36 +50,7 @@ export default function DashboardNavbar() {
                         </div>
                     }
 
-                    {/* <button
-                        className="md:hidden"
-                        onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        aria-label="Toggle menu"
-                        aria-expanded={isMenuOpen}
-                    >
-                        <span className="sr-only">Menu</span>
-                        <svg
-                            className="h-6 w-6"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            {isMenuOpen ? (
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M6 18L18 6M6 6l12 12"
-                                />
-                            ) : (
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M4 6h16M4 12h16M4 18h16"
-                                />
-                            )}
-                        </svg>
-                    </button> */}
+                   
                     <div className="md:hidden">
                         <DashboardDrawer />
                     </div>
@@ -87,7 +58,7 @@ export default function DashboardNavbar() {
             </header>
 
             {/* moblie menu  */}
-            {
+            {/* {
                 isMenuOpen && (
                     <div className="absolute top-16   bg-blue-100 w-1/2 h-screen border-t border-separator md:hidden">
                         <div className="border h-full justify-between gap-2 p-4 text-center">
@@ -104,7 +75,7 @@ export default function DashboardNavbar() {
                         </div>
                     </div>
                 )
-            }
+            } */}
         </nav >
     );
 }

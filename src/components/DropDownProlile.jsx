@@ -25,7 +25,7 @@ export default function ProfileDropdown({ user }) {
                 className="flex items-center"
             >
                 <Avatar>
-                    <Avatar.Image alt="John Doe" src={user?.image} />
+                    <Avatar.Image alt="John Doe" src={user?.image || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIf4R5qPKHPNMyAqV-FjS_OTBB8pfUV29Phg&s'} />
                     <Avatar.Fallback>{user?.name[0]}</Avatar.Fallback>
                 </Avatar>
             </button>

@@ -10,7 +10,7 @@ import { FaUserEdit } from "react-icons/fa";
 
 export function UpdateModal({ pet }) {
     const router = useRouter()
-    // console.log(pet)
+    
     const updatePet = async (e) => {
         e.preventDefault()
         const formData = new FormData(e.currentTarget);

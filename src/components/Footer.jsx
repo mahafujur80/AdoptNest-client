@@ -10,7 +10,7 @@ const Footer = () => {
           {/* Column 1 - Brand */}
           <div>
             <h2 className="text-2xl font-bold mb-4">
-              <span className="text-emerald-400">Pet</span>Adoption
+              Adopt<span className="text-emerald-400">Nest</span>
             </h2>
             <p className="text-gray-400 text-sm mb-4">
               Giving homeless pets a second chance at finding their forever home.

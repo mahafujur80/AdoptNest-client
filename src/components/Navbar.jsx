@@ -6,8 +6,11 @@ import { FaPaw } from "react-icons/fa";
 import Link from 'next/link'
 import ProfileDropdown from "./DropDownProlile";
 import { authClient } from "@/lib/auth-client";
+import { usePathname } from "next/navigation";
+
 
 export default function NavBar() {
+  const pathName = usePathname()
   const { data: session, isPending } = authClient.useSession()
   const user = session?.user;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,15 +22,15 @@ export default function NavBar() {
 
           <div className="flex items-center gap-3">
             <FaPaw  className=" bg-emerald-100 text-emerald-600 text-sm w-10 h-10 p-2 rounded-full" />
-            <p className="font-bold text-2xl md:text-3xl">Adop<span className="text-emerald-500">Nest</span></p>
+            <p className="font-bold text-2xl md:text-3xl">Adopt<span className="text-emerald-500">Nest</span></p>
           </div>
         </div>
         <ul className="hidden items-center gap-4 md:flex">
           <li>
-            <Link href="/">Home</Link>
+            <Link href="/" className={`${pathName === "/" ? "text-emerald-500 font-medium" : ""}  transition` } >Home</Link>
           </li>
           <li>
-            <Link href="/all-pets" className="font-medium" >
+            <Link href="/all-pets" className={`${pathName === "/all-pets" ? "text-emerald-500 font-medium" : ""}  transition`} >
               All Pets
             </Link>
           </li>
@@ -50,7 +53,9 @@ export default function NavBar() {
         {/* menue btn */}
         <div className="flex items-center gap-5 md:hidden">
           
-            <ProfileDropdown user={user}/>
+            {
+              (!isPending && !user) ? <></>: <ProfileDropdown user={user}/>
+            }
         
           <button
             className="md:hidden"
@@ -91,18 +96,18 @@ export default function NavBar() {
           <div className="absolute top-16 bg-gray-200 w-full  border-t border-b-rounded-lg border-separator md:hidden">
             <ul className="flex flex-col gap-2 p-4 text-center">
               <li>
-                <Link href="/" className="font-medium block">Home</Link>
+                <Link href="/" className={`font-medium block ${pathName === "/" ? "text-white bg-emerald-500 rounded-lg p-2" : ""}`}>Home</Link>
               </li>
               <li>
-                <Link href="/all-pets" className="font-medium block " >
+                <Link href="/all-pets" className={`font-medium block ${pathName === "/all-pets" ? "text-white bg-emerald-500 rounded-lg p-2" : ""}`} >
                   All Pets
                 </Link>
               </li>
 
              {
               (!isPending && !user)?  <li className="mt-4 flex flex-col gap-2 border-t border-separator pt-4">
-                <Link href="/login" > <Button className="w-full">Login</Button></Link>
-                <Link href="/signup" > <Button className="w-full">Sign Up</Button></Link>
+                <Link href="/login" > <Button className="w-full bg-emerald-500 text-white rounded-lg  font-semibold hover:bg-emerald-600 transition shadow-md hover:shadow-lg">Login</Button></Link>
+                <Link href="/signup" > <Button className="w-full bg-emerald-500 text-white rounded-lg  font-semibold hover:bg-emerald-600 transition shadow-md hover:shadow-lg">Sign Up</Button></Link>
               </li> : <></>
              }
             </ul>

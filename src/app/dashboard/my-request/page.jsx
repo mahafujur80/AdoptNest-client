@@ -22,7 +22,7 @@ const MyRequestPage = async () => {
     return (
         <div className='lg:px-10 py-5'>
             <div className='pb-10'>
-                <h1 className='text-4xl font-bold text-emerald-400'>Adoption Applications</h1>
+                <h1 className='text-2xl md:text-4xl font-bold text-emerald-400'>Adoption Applications</h1>
                 <p className='text-sm'>Check the current status of your adoption applications.</p>
             </div>
 

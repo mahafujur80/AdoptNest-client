@@ -38,7 +38,7 @@ const AddPetPage = () => {
         }
 
         const {data:tokenData} = await authClient.token();
-        console.log(tokenData)
+        
         
 
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pets`, {
@@ -64,7 +64,7 @@ const AddPetPage = () => {
     return (
         <div className='lg:px-10 '>
             <div className="pb-10">
-                <h1 className="text-4xl font-bold text-emerald-400">
+                <h1 className="text-2xl md:text-4xl font-bold text-emerald-400">
                     Add New Pet
                 </h1>
                 <p className="text-sm text-gray-600">
