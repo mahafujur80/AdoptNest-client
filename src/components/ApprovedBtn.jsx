@@ -2,6 +2,7 @@
 
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const ApprovedBtn = ({pets}) => {
     const router = useRouter()
@@ -17,6 +18,7 @@ const ApprovedBtn = ({pets}) => {
     const data = await res.json()
     if(data.success){
      router.refresh()
+     toast.success('Approved')
     }
   }
 
