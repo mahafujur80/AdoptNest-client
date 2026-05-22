@@ -71,7 +71,7 @@ const LoginPage = () => {
           </h1>
 
           <p className="text-sm text-default-500 mt-2">
-            Login to continue your pet adoption journey 🐶🐱
+            Login to continue your pet adoption journey
           </p>
 
         </div>

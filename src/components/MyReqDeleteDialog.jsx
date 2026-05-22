@@ -9,20 +9,20 @@ export function MyReqDeleteDialog({pet}) {
       const router = useRouter()
 
      const handleDelete = async()=>{
-      //jwt token
-      const  {data:tokenData} = await authClient.token()
+          //jwt token
+          const  {data:tokenData} = await authClient.token()
 
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/adopted/${pet?.petId}`,{
-            method: 'DELETE',
-            headers: {authorization: `Bearer ${tokenData?.token}`}
-        })
-        const data = await res.json()
-        if(data.deletedCount === 1){
-            toast.success('Delete Success')
-            router.refresh()
+          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/adopted/${pet?.petId}`,{
+              method: 'DELETE',
+              headers: {authorization: `Bearer ${tokenData?.token}`}
+          })
+          const data = await res.json()
+          if(data.deletedCount === 1){
+              toast.success('Delete Success')
+              router.refresh()
         }
         if(data.deletedCount < 1){
-            toast.error('Delete Fail')
+              toast.error('Delete Fail')
             return
         }
     }

@@ -1,4 +1,4 @@
-# 🐾 Pet Adoption Platform
+# 🐾 Pet Adoption Platform (AdoptNest)
 
 ## 📖 Purpose
 A full-stack pet adoption web application where users can discover pets, post pets for adoption, and manage adoption requests through a secure dashboard system.
@@ -6,7 +6,7 @@ A full-stack pet adoption web application where users can discover pets, post pe
 ---
 
 ## 🌐 Live URL
-https://your-live-url.com
+https://adopt-nest-client.vercel.app/
 
 ---
 

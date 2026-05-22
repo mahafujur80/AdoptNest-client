@@ -2,17 +2,20 @@
 import { authClient } from '@/lib/auth-client';
 import { Button, Description, FieldError, Form, Input, Label, ListBox, TextField, Select, TextArea } from '@heroui/react';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
 
 
 const AddPetPage = () => {
     const router = useRouter();
+    const [isSubmiting, setSubmiting] = useState(false)
 
     const { data: session } = authClient.useSession();
     const user = session?.user;
     
     const handleAddPet = async (e) => {
         e.preventDefault()
+        setSubmiting(true)
         const formData = new FormData(e.currentTarget);
         const petObj = Object.fromEntries(formData.entries())
         
@@ -50,10 +53,12 @@ const AddPetPage = () => {
 
         if (!data || !data.insertedId) {
             toast.error('Something is wrong !')
+            setSubmiting(false)
         }
         if (data.insertedId) {
             toast.success('New Pet Added Successfully')
             router.push('/dashboard/my-listing')
+            setSubmiting(false)
         }
     }
     return (
@@ -278,7 +283,7 @@ const AddPetPage = () => {
 
 
                     <div className="flex gap-2 py-5">
-                        <Button type="submit" className="w-full  bg-emerald-500 text-white rounded-lg  hover:bg-emerald-600 transition shadow-md hover:shadow-lg">
+                        <Button isLoading={isSubmiting}  type="submit" className="w-full  bg-emerald-500 text-white rounded-lg  hover:bg-emerald-600 transition shadow-md hover:shadow-lg">
                             Submit Pet
                         </Button>
                         <Button type="reset" variant="secondary" className="w-full rounded-lg text-danger">

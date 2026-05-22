@@ -73,7 +73,7 @@ const RegisterPage = () => {
             Create Account
           </h1>
           <p className="text-default-500 mt-2 text-sm">
-            Join our pet adoption community 🐶🐱
+            Join our pet adoption community
           </p>
         </div>
 
@@ -84,7 +84,7 @@ const RegisterPage = () => {
             isRequired
             name="name"
             validate={(value) =>
-            value.length < 3 ? "Name must be at least 3 characters" : null
+              value.length < 3 ? "Name must be at least 3 characters" : null
             }
           >
             <Label>Full Name</Label>
@@ -137,7 +137,7 @@ const RegisterPage = () => {
 
             <InputGroup>
               <InputGroup.Input
-                 name="password"
+                name="password"
                 type={isVisible ? "text" : "password"}
                 placeholder="Password"
               />
@@ -206,7 +206,7 @@ const RegisterPage = () => {
         </Form>
 
         {/* divider */}
-      <div className="flex items-center my-6">
+        <div className="flex items-center my-6">
 
           <div className="flex-grow border-t border-default-200"></div>
 
