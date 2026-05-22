@@ -149,14 +149,14 @@ const PetDetailsPage = async ({ pet }) => {
             <div className="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl p-5 border border-emerald-100">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full flex items-center justify-center text-white font-bold text-lg shrink-0">
-                  {pet.ownerEmail[0].toUpperCase()}
+                  {pet?.ownerEmail?.[0]?.toUpperCase()}
                 </div>
 
                 <div className="min-w-0">
                   <div className="text-xs text-gray-500">Pet Owner</div>
 
                   <div className="font-semibold text-gray-900 break-all">
-                    {pet.ownerEmail}
+                    {pet?.ownerEmail}
                   </div>
 
                   <div className="text-xs text-emerald-600 mt-1">
