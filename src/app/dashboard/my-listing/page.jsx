@@ -24,7 +24,7 @@ const page = async () => {
     ).length
 
     return (
-        <div className=''>
+        <div className='mb-10'>
             <div className="pb-10">
                 <h1 className="text-2xl md:text-4xl font-bold text-emerald-400">
                     Pet Management

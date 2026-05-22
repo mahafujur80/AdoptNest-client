@@ -2,11 +2,23 @@ import DashboardNavbar from "@/components/DashboardNavbar";
 import "../globals.css";
 import DashboardNavigation from "@/components/DashboardNavigation";
 import { Toaster } from "react-hot-toast";
+import { Outfit } from "next/font/google";
+
+
+const outfit = Outfit({
+  variable: "--font-outfit",
+  subsets: ["latin"],
+});
+
+export const metadata = {
+  title: "AdoptNest-Dashboard",
+  description: "Dashboard of AdoptNest",
+};
 
 export default function RootLayout({ children }) {
     return (
         <html lang="en">
-            <body className="overflow-hidden">
+            <body className={`overflow-hidden ${outfit.className} antialiased`}>
 
                 <DashboardNavbar />
 
