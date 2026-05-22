@@ -1,6 +1,7 @@
 // app/not-found.js
 
 
+import "./globals.css";
 import Link from "next/link";
 import { FaPaw, FaHome } from "react-icons/fa";
 import { Button } from "@heroui/react";

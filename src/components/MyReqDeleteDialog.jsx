@@ -29,7 +29,7 @@ export function MyReqDeleteDialog({pet}) {
 
   return (
     <AlertDialog>
-      <Button variant='outline' className="w-full text-sm  rounded-lg text-danger border-danger font-medium">Delete</Button>
+      <Button isDisabled={pet?.status === 'Approved'} variant='outline' className="w-full text-sm  rounded-lg text-danger border-danger font-medium">Delete</Button>
       <AlertDialog.Backdrop>
         <AlertDialog.Container>
           <AlertDialog.Dialog className="sm:max-w-[400px]">
